@@ -18,7 +18,7 @@ namespace SquareRoyal
         /// Gets the symbol for a card suit.
         /// </summary>
         /// <param name="suit">The suit.</param>
-        /// <returns>The unicode character.</returns>
+        /// <returns>The symbol.</returns>
         public static string GetSuitCharacter(this Suit suit)
         {
             switch (suit)
@@ -99,8 +99,6 @@ namespace SquareRoyal
         /// <summary>
         /// Gets the common name for a card's number.
         /// </summary>
-        /// <param name="i">The card's number.</param>
-        /// <returns>The one or two character string of the number.</returns>
         public string NumberName
         {
             get
