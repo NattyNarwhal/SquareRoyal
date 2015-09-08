@@ -144,7 +144,7 @@ namespace SquareRoyal
             }
             catch (NullReferenceException)
             {
-                
+                // NREs are harmless - they're just the lack of cards.
             }
             return false;
         }
