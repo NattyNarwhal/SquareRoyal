@@ -384,5 +384,10 @@ namespace SquareRoyal
             }
             canAlwaysDiscardCard = cheat_alwaysDiscardCard.Checked;
         }
+
+        private void cheat_showDeck_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(this, String.Join(Environment.NewLine, deck), "Deck (bottom to top)");
+        }
     }
 }

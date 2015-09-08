@@ -34,11 +34,12 @@
             this.gameMenu = new System.Windows.Forms.MenuItem();
             this.newMenuItem = new System.Windows.Forms.MenuItem();
             this.menuSep1 = new System.Windows.Forms.MenuItem();
-            this.quitMenuItem = new System.Windows.Forms.MenuItem();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.cardsLeft = new System.Windows.Forms.Label();
-            this.statusBar1 = new System.Windows.Forms.StatusBar();
             this.aboutMenuItem = new System.Windows.Forms.MenuItem();
+            this.quitMenuItem = new System.Windows.Forms.MenuItem();
+            this.cheatMenu = new System.Windows.Forms.MenuItem();
+            this.cheat_canAlwaysPlaceCard = new System.Windows.Forms.MenuItem();
+            this.cheat_alwaysDiscardCard = new System.Windows.Forms.MenuItem();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox16 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox15 = new System.Windows.Forms.PictureBox();
@@ -55,10 +56,10 @@
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.cardsLeft = new System.Windows.Forms.Label();
+            this.statusBar1 = new System.Windows.Forms.StatusBar();
             this.nextCard = new System.Windows.Forms.PictureBox();
-            this.cheatMenu = new System.Windows.Forms.MenuItem();
-            this.cheat_canAlwaysPlaceCard = new System.Windows.Forms.MenuItem();
-            this.cheat_alwaysDiscardCard = new System.Windows.Forms.MenuItem();
+            this.cheat_showDeck = new System.Windows.Forms.MenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -107,12 +108,44 @@
             this.menuSep1.Index = 1;
             this.menuSep1.Text = "-";
             // 
+            // aboutMenuItem
+            // 
+            this.aboutMenuItem.Index = 2;
+            this.aboutMenuItem.Shortcut = System.Windows.Forms.Shortcut.F1;
+            this.aboutMenuItem.Text = "&About";
+            this.aboutMenuItem.Click += new System.EventHandler(this.aboutMenuItem_Click);
+            // 
             // quitMenuItem
             // 
             this.quitMenuItem.Index = 3;
             this.quitMenuItem.Shortcut = System.Windows.Forms.Shortcut.CtrlQ;
             this.quitMenuItem.Text = "&Quit";
             this.quitMenuItem.Click += new System.EventHandler(this.quitMenuItem_Click);
+            // 
+            // cheatMenu
+            // 
+            this.cheatMenu.Enabled = false;
+            this.cheatMenu.Index = 1;
+            this.cheatMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.cheat_canAlwaysPlaceCard,
+            this.cheat_alwaysDiscardCard,
+            this.cheat_showDeck});
+            this.cheatMenu.Text = "&Cheats";
+            this.cheatMenu.Visible = false;
+            // 
+            // cheat_canAlwaysPlaceCard
+            // 
+            this.cheat_canAlwaysPlaceCard.Enabled = false;
+            this.cheat_canAlwaysPlaceCard.Index = 0;
+            this.cheat_canAlwaysPlaceCard.Text = "Always &Place Card";
+            this.cheat_canAlwaysPlaceCard.Click += new System.EventHandler(this.cheat_canAlwaysPlaceCard_Click);
+            // 
+            // cheat_alwaysDiscardCard
+            // 
+            this.cheat_alwaysDiscardCard.Enabled = false;
+            this.cheat_alwaysDiscardCard.Index = 1;
+            this.cheat_alwaysDiscardCard.Text = "Always &Discard Card";
+            this.cheat_alwaysDiscardCard.Click += new System.EventHandler(this.cheat_alwaysDiscardCard_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -149,32 +182,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(328, 424);
             this.tableLayoutPanel1.TabIndex = 5;
-            // 
-            // cardsLeft
-            // 
-            this.cardsLeft.BackColor = System.Drawing.Color.Transparent;
-            this.cardsLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cardsLeft.ForeColor = System.Drawing.Color.White;
-            this.cardsLeft.Location = new System.Drawing.Point(346, 116);
-            this.cardsLeft.Name = "cardsLeft";
-            this.cardsLeft.Size = new System.Drawing.Size(72, 32);
-            this.cardsLeft.TabIndex = 6;
-            this.cardsLeft.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // statusBar1
-            // 
-            this.statusBar1.Location = new System.Drawing.Point(0, 444);
-            this.statusBar1.Name = "statusBar1";
-            this.statusBar1.Size = new System.Drawing.Size(428, 22);
-            this.statusBar1.SizingGrip = false;
-            this.statusBar1.TabIndex = 7;
-            // 
-            // aboutMenuItem
-            // 
-            this.aboutMenuItem.Index = 2;
-            this.aboutMenuItem.Shortcut = System.Windows.Forms.Shortcut.F1;
-            this.aboutMenuItem.Text = "&About";
-            this.aboutMenuItem.Click += new System.EventHandler(this.aboutMenuItem_Click);
             // 
             // pictureBox16
             // 
@@ -384,6 +391,25 @@
             this.pictureBox8.TabStop = false;
             this.pictureBox8.Click += new System.EventHandler(this.card_click);
             // 
+            // cardsLeft
+            // 
+            this.cardsLeft.BackColor = System.Drawing.Color.Transparent;
+            this.cardsLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cardsLeft.ForeColor = System.Drawing.Color.White;
+            this.cardsLeft.Location = new System.Drawing.Point(346, 116);
+            this.cardsLeft.Name = "cardsLeft";
+            this.cardsLeft.Size = new System.Drawing.Size(72, 32);
+            this.cardsLeft.TabIndex = 6;
+            this.cardsLeft.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // statusBar1
+            // 
+            this.statusBar1.Location = new System.Drawing.Point(0, 444);
+            this.statusBar1.Name = "statusBar1";
+            this.statusBar1.Size = new System.Drawing.Size(428, 22);
+            this.statusBar1.SizingGrip = false;
+            this.statusBar1.TabIndex = 7;
+            // 
             // nextCard
             // 
             this.nextCard.BackColor = System.Drawing.Color.Transparent;
@@ -395,29 +421,12 @@
             this.nextCard.TabStop = false;
             this.nextCard.Click += new System.EventHandler(this.nextCard_Click);
             // 
-            // cheatMenu
+            // cheat_showDeck
             // 
-            this.cheatMenu.Enabled = false;
-            this.cheatMenu.Index = 1;
-            this.cheatMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.cheat_canAlwaysPlaceCard,
-            this.cheat_alwaysDiscardCard});
-            this.cheatMenu.Text = "&Cheats";
-            this.cheatMenu.Visible = false;
-            // 
-            // cheat_canAlwaysPlaceCard
-            // 
-            this.cheat_canAlwaysPlaceCard.Enabled = false;
-            this.cheat_canAlwaysPlaceCard.Index = 0;
-            this.cheat_canAlwaysPlaceCard.Text = "Always &Place Card";
-            this.cheat_canAlwaysPlaceCard.Click += new System.EventHandler(this.cheat_canAlwaysPlaceCard_Click);
-            // 
-            // cheat_alwaysDiscardCard
-            // 
-            this.cheat_alwaysDiscardCard.Enabled = false;
-            this.cheat_alwaysDiscardCard.Index = 1;
-            this.cheat_alwaysDiscardCard.Text = "Always &Discard Card";
-            this.cheat_alwaysDiscardCard.Click += new System.EventHandler(this.cheat_alwaysDiscardCard_Click);
+            this.cheat_showDeck.Enabled = false;
+            this.cheat_showDeck.Index = 2;
+            this.cheat_showDeck.Text = "&Show Deck";
+            this.cheat_showDeck.Click += new System.EventHandler(this.cheat_showDeck_Click);
             // 
             // MainForm
             // 
@@ -489,6 +498,7 @@
         private System.Windows.Forms.MenuItem cheatMenu;
         private System.Windows.Forms.MenuItem cheat_canAlwaysPlaceCard;
         private System.Windows.Forms.MenuItem cheat_alwaysDiscardCard;
+        private System.Windows.Forms.MenuItem cheat_showDeck;
     }
 }
 
