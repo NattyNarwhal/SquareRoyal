@@ -51,7 +51,7 @@
     <Compile Include="AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GlobalFunctions.cs" />
+    <Compile Include="Types.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -12,7 +12,7 @@ namespace SquareRoyal
 {
     public partial class MainForm : Form
     {
-        public List<Card> deck = Card.GetOrderedDeck();
+        public List<Card> deck = CardFunctions.GetOrderedDeck();
         public Card[,] field;
         public bool cleaning;
 
@@ -43,7 +43,7 @@ namespace SquareRoyal
         public void NewGame()
         {
             statusBar1.Text = String.Empty;
-            deck = Card.GetOrderedDeck();
+            deck = CardFunctions.GetOrderedDeck();
             deck.Shuffle();
             field = new Card[4, 4]; // it should be 3,3 but C#...
             cleaning = false;
