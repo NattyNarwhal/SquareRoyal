@@ -4,6 +4,12 @@ A (fairly frustrating) patience game known as King's Corners. Based on the [vers
 
 Licensed under a 3-clause BSD license.
 
+## TODO
+
+* [ ] Refactor the win conditions a bit.
+* [ ] Scaleable UI.
+* [ ] Eventually, split game logic out of the view for future interfaces.
+
 ## How to play
 
 The goal of the game is to get the "royal" cards (King, Queen, and Jack) into their certain slots that they must be placed in. To win, all royal cards must be placed in their slots; Kings in the corner, Queens in the top and bottom edges, and Jacks in the left and right edges. The royals can only be placed in the places they belong to.
