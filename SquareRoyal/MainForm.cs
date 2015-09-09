@@ -17,8 +17,7 @@ namespace SquareRoyal
         public bool selectingAnotherPair = false;
         public Tuple<int, int> selectedCard = null;
 
-        // cheats
-        public bool canAlwaysDiscardCard = false;
+        public bool CheatCanAlwaysDiscardCard = false;
 
         public MainForm()
         {
@@ -160,7 +159,7 @@ namespace SquareRoyal
                     return;
                 }
                 // are we a massive cheater? remember, no bugfixes for the weary
-                if (canAlwaysDiscardCard)
+                if (CheatCanAlwaysDiscardCard)
                 {
                     RemoveCard(x, y);
                     selectingAnotherPair = false;
@@ -265,15 +264,8 @@ namespace SquareRoyal
 
         private void cheat_alwaysDiscardCard_Click(object sender, EventArgs e)
         {
-            if (cheat_alwaysDiscardCard.Checked)
-            {
-                cheat_alwaysDiscardCard.Checked = false;
-            }
-            else
-            {
-                cheat_alwaysDiscardCard.Checked = true;
-            }
-            canAlwaysDiscardCard = cheat_alwaysDiscardCard.Checked;
+            cheat_alwaysDiscardCard.Checked = !cheat_alwaysDiscardCard.Checked;
+            CheatCanAlwaysDiscardCard = cheat_alwaysDiscardCard.Checked;
         }
 
         private void cheat_showDeck_Click(object sender, EventArgs e)

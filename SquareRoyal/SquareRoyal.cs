@@ -15,10 +15,12 @@ namespace SquareRoyal
         /// Gets or sets the playing field.
         /// </summary>
         public Card[,] Field { get; set; }
+
         /// <summary>
         /// Gets or sets if we are cleaning.
         /// </summary>
         public bool Cleaning { get; set; }
+
         /// <summary>
         /// Gets if the game is won.
         /// </summary>
@@ -26,7 +28,6 @@ namespace SquareRoyal
 
         // cheats
         public bool CheatCanAlwaysPlaceCard = false;
-        public bool canAlwaysDiscardCard = false;
 
         public SquareRoyal()
         {
