@@ -80,8 +80,9 @@ namespace SquareRoyal
                 p.BackColor = Color.Transparent;
             }
         }
-        
-        public void DrawNextCard() {
+
+        public void DrawNextCard()
+        {
             // no matter what get SOMETHING
             nextCard.Image = Properties.Resources.Backing;
             // update the remaining cards in deck
@@ -109,7 +110,7 @@ namespace SquareRoyal
         {
             if (game.AttemptPlaceCard(x, y, c))
             {
-                ((PictureBox)tableLayoutPanel1.GetControlFromPosition(y,x)).Image = GetFace(c); // picture
+                ((PictureBox)tableLayoutPanel1.GetControlFromPosition(y, x)).Image = GetFace(c); // picture
                 // empty the status bar messages
                 statusBar1.Text = String.Empty;
                 if (game.Won)
@@ -211,7 +212,7 @@ namespace SquareRoyal
             else
             {
                 // statusBar1.Text = tableLayoutPanel1.GetPositionFromControl((Control)sender).ToString();
-                AttemptPlaceCard(x,y, game.Deck.Last());
+                AttemptPlaceCard(x, y, game.Deck.Last());
             }
         }
 
@@ -220,18 +221,14 @@ namespace SquareRoyal
             // tell the thing we're ready!
             if (game.Cleaning)
             {
-                // check if we can stop cleamiing
-                foreach (Card c in game.Field)
+                // check if we can stop cleaning
+                if (!game.ShouldClean())
                 {
-                    // if we see an empty card we're free
-                    if (c == null)
-                    {
-                        // stop cleaning and clean up our messes
-                        game.Cleaning = false;
-                        selectedCard = null;
-                        VisuallyDeselectAll();
-                        DrawNextCard();
-                    }
+                    // stop cleaning and clean up our messes
+                    game.Cleaning = false;
+                    selectedCard = null;
+                    VisuallyDeselectAll();
+                    DrawNextCard();
                 }
                 // if not, we return
             }

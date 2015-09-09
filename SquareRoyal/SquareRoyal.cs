@@ -131,8 +131,6 @@ namespace SquareRoyal
             return true;
         }
 
-
-
         public void RemoveCard(int x, int y)
         {
             Field[x, y] = null;
