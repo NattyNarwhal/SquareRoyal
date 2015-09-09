@@ -99,12 +99,6 @@ namespace SquareRoyal
             }
         }
 
-        public void ShouldClean()
-        {
-            statusBar1.Text = game.ShouldClean() ?
-                "The board is filled - start discarding pairs that add up to 10 or cards of 10." : String.Empty;
-        }
-
         public void RemoveCard(int x, int y)
         {
             game.RemoveCard(x, y);
@@ -125,7 +119,10 @@ namespace SquareRoyal
                         NewGame();
                     }
                 }
-                ShouldClean();
+                if (game.Cleaning)
+                {
+                    statusBar1.Text = "The board is filled - start discarding pairs that add up to 10 or cards of 10.";
+                }
                 DrawNextCard();
             }
             else
