@@ -40,8 +40,7 @@ namespace SquareRoyal
         {
             statusBar1.Text = String.Empty;
             game = new SquareRoyal();
-            selectingAnotherPair = false;
-            VisuallyDeselectAll();
+            DeselectAll();
             foreach (PictureBox p in tableLayoutPanel1.Controls)
             {
                 p.Image = null;
@@ -63,6 +62,13 @@ namespace SquareRoyal
             }
         }
 
+        public void DeselectAll()
+        {
+            selectingAnotherPair = false;
+            selectedCard = null;
+            VisuallyDeselectAll();
+        }
+
         public void DrawNextCard()
         {
             // no matter what get SOMETHING
@@ -82,9 +88,8 @@ namespace SquareRoyal
             }
         }
 
-        public void RemoveCard(int x, int y)
+        public void VisuallyRemoveCard(int x, int y)
         {
-            game.RemoveCard(x, y);
             ((PictureBox)tableLayoutPanel1.GetControlFromPosition(y, x)).Image = null;
         }
 
@@ -141,10 +146,9 @@ namespace SquareRoyal
                 // are we a massive cheater? remember, no bugfixes for the weary
                 if (CheatCanAlwaysDiscardCard)
                 {
-                    RemoveCard(x, y);
-                    selectingAnotherPair = false;
-                    selectedCard = null;
-                    VisuallyDeselectAll();
+                    game.RemoveCard(x, y);
+                    VisuallyRemoveCard(x, y);
+                    DeselectAll();
                     return;
                 }
                 // if we have a card highlighted, we need a buddy for it
@@ -152,41 +156,32 @@ namespace SquareRoyal
                 {
                     // royals and a 10 we don't check for because you can't meet c1 + c2 = 10 that way
                     // but first, check if it's the same bloody card! if so, deselect and exit
-                    if (game.Field[x, y] == game.Field[selectedCard.Item1, selectedCard.Item2])
+                    if (game.AttemptDiscardPair(x, y, selectedCard.Item1, selectedCard.Item2))
                     {
-                        selectingAnotherPair = false;
-                        selectedCard = null;
-                        VisuallyDeselectAll();
-                        return;
+                        VisuallyRemoveCard(x, y);
+                        VisuallyRemoveCard(selectedCard.Item1, selectedCard.Item2);
+                        DeselectAll();
                     }
-                    // check if it adds to 10, and if so, remove both cards
-                    if ((game.Field[x, y].Number + game.Field[selectedCard.Item1, selectedCard.Item2].Number) == 10)
-                    {
-                        RemoveCard(x, y);
-                        RemoveCard(selectedCard.Item1, selectedCard.Item2);
-                        selectingAnotherPair = false;
-                        selectedCard = null;
-                        VisuallyDeselectAll();
-                    }
+                    DeselectAll();
                 }
                 // we're gonna pick the first of the pair
                 else
                 {
-                    // if 10, we delete immediately, if royal, we return immediately
-                    switch (game.Field[x, y].Number)
+                    if (game.CanDiscard(x, y))
                     {
-                        case 13:
-                        case 12:
-                        case 11:
-                            break;
-                        case 10:
-                            RemoveCard(x, y);
-                            break;
-                        default:
+                        if (game.DiscardNeedsPair(x, y))
+                        {
                             selectingAnotherPair = true;
                             selectedCard = new Tuple<int, int>(x, y);
                             ((PictureBox)sender).BackColor = Color.LightGreen;
-                            break;
+                        }
+                        else
+                        {
+                            if (game.AttemptDiscardSingleCard(x, y))
+                            {
+                                VisuallyRemoveCard(x, y);
+                            }
+                        }
                     }
                 }
             }
@@ -203,13 +198,10 @@ namespace SquareRoyal
             // tell the thing we're ready!
             if (game.Cleaning)
             {
-                // check if we can stop cleaning
-                if (!game.ShouldClean())
+                // stop cleaning and clean up our messes
+                if (game.StopCleaning())
                 {
-                    // stop cleaning and clean up our messes
-                    game.Cleaning = false;
-                    selectedCard = null;
-                    VisuallyDeselectAll();
+                    DeselectAll();
                     DrawNextCard();
                 }
                 // if not, we return

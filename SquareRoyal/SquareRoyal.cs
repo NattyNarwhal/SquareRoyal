@@ -135,6 +135,19 @@ namespace SquareRoyal
             return true;
         }
 
+        public bool StopCleaning()
+        {
+            if (Cleaning & !ShouldClean())
+            {
+                Cleaning = false;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public void RemoveCard(int x, int y)
         {
             Field[x, y] = null;
@@ -161,6 +174,44 @@ namespace SquareRoyal
         public bool AttemptPlaceCard(int x, int y)
         {
             return AttemptPlaceCard(x, y, Deck.Last());
+        }
+
+        public bool CanDiscard(int x, int y)
+        {
+            return !IsEmptyCell(x, y) & Field[x, y].Number < 11;
+        }
+
+        public bool DiscardNeedsPair(int x, int y)
+        {
+            return !IsEmptyCell(x, y) & Field[x, y].Number < 10;
+        }
+
+        public bool AttemptDiscardSingleCard(int x, int y)
+        {
+            if (!IsEmptyCell(x, y) & Field[x, y].Number == 10)
+            {
+                RemoveCard(x, y);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool AttemptDiscardPair(int x1, int y1, int x2, int y2)
+        {
+            if (Cleaning & !IsEmptyCell(x1, y1) & !IsEmptyCell(x2, y2)
+                & Field[x1, y1].Number + Field[x2, y2].Number == 10)
+            {
+                RemoveCard(x1, y1);
+                RemoveCard(x2, y2);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
