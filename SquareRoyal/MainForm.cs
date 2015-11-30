@@ -51,26 +51,8 @@ namespace SquareRoyal
 
         public Image GetFace(Card card)
         {
-            string resource = String.Empty;
-            switch (card.Suit)
-            {
-                case Suit.Clubs:
-                    resource += "Clubs";
-                    break;
-                case Suit.Diamonds:
-                    resource += "Diamonds";
-                    break;
-                case Suit.Hearts:
-                    resource += "Hearts";
-                    break;
-                case Suit.Spades:
-                    resource += "Spades";
-                    break;
-                default: break;
-            }
-            resource += "_";
-            resource += card.Number;
-            return (Image)Properties.Resources.ResourceManager.GetObject(resource);
+            return (Image)Properties.Resources.ResourceManager
+                .GetObject(String.Format("{0}_{1}", card.Suit, card.Number));
         }
 
         public void VisuallyDeselectAll()
