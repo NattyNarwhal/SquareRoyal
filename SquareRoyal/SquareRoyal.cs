@@ -71,6 +71,10 @@ namespace SquareRoyal
 
         public bool CanPlace(int x, int y, Card c)
         {
+            if (Cleaning)
+            {
+                return false;
+            }
             // Is the card already occupied?
             if (!IsEmptyCell(x, y))
             {
