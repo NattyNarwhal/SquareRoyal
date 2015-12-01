@@ -28,6 +28,7 @@ namespace SquareRoyal
 
         // cheats
         public bool CheatCanAlwaysPlaceCard = false;
+        public bool CheatCanAlwaysDiscardCard = false;
 
         public SquareRoyal()
         {
@@ -178,17 +179,26 @@ namespace SquareRoyal
 
         public bool CanDiscard(int x, int y)
         {
-            return !IsEmptyCell(x, y) & Field[x, y].Number < 11;
+            return CheatCanAlwaysDiscardCard ||
+                (!IsEmptyCell(x, y) & Field[x, y].Number < 11);
         }
 
         public bool DiscardNeedsPair(int x, int y)
         {
-            return !IsEmptyCell(x, y) & Field[x, y].Number < 10;
+            if (CheatCanAlwaysDiscardCard)
+            {
+                return false;
+            }
+            else
+            {
+                return !IsEmptyCell(x, y) & Field[x, y].Number < 10;
+            }
         }
 
         public bool AttemptDiscardSingleCard(int x, int y)
         {
-            if (!IsEmptyCell(x, y) & Field[x, y].Number == 10)
+            if (CheatCanAlwaysDiscardCard ||
+                (!IsEmptyCell(x, y) & Field[x, y].Number == 10))
             {
                 RemoveCard(x, y);
                 return true;
@@ -201,8 +211,8 @@ namespace SquareRoyal
 
         public bool AttemptDiscardPair(int x1, int y1, int x2, int y2)
         {
-            if (Cleaning & !IsEmptyCell(x1, y1) & !IsEmptyCell(x2, y2)
-                & Field[x1, y1].Number + Field[x2, y2].Number == 10)
+            if (CheatCanAlwaysDiscardCard || (Cleaning & !IsEmptyCell(x1, y1) & !IsEmptyCell(x2, y2)
+                & Field[x1, y1].Number + Field[x2, y2].Number == 10))
             {
                 RemoveCard(x1, y1);
                 RemoveCard(x2, y2);
