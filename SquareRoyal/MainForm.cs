@@ -124,12 +124,13 @@ namespace SquareRoyal
             // don't do anything if we've won
             if (game.Won)
             {
+                Message("You've won!");
                 return;
             }
             // is the deck empty? if so, we can't place
             if (game.Deck.Count == 0)
             {
-                statusBar1.Text = "The deck is empty. You've probably won.";
+                Message("The deck is empty.");
                 return;
             }
             // get our coords for later use
