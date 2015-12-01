@@ -153,6 +153,10 @@ namespace SquareRoyal
         {
             if (Cleaning)
             {
+                if (CheatCanAlwaysDiscardCard)
+                {
+                    return true;
+                }
                 for (int x = 0; x < 3; x++)
                 {
                     for (int y = 0; y < 3; y++)
@@ -171,6 +175,10 @@ namespace SquareRoyal
             }
             else
             {
+                if (CheatCanAlwaysDiscardCard)
+                {
+                    return false;
+                }
                 switch (Deck.Last().Number)
                 {
                     case 13:
