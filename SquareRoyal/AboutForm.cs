@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace SquareRoyal
 {
@@ -14,6 +16,9 @@ namespace SquareRoyal
         public AboutForm()
         {
             InitializeComponent();
+            var fv = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location);
+            versionLabel.Text = String.Format("{0}, by {1}", fv.ProductVersion, fv.CompanyName);
+            titleLabel.Text = fv.ProductName;
         }
 
         private void button1_Click(object sender, EventArgs e)
