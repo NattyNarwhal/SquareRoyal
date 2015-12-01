@@ -116,6 +116,10 @@ namespace SquareRoyal
             {
                 Message("The board is filled - start discarding pairs that add up to 10 or cards of 10.");
             }
+            if (game.CheckIfStuck())
+            {
+                Message("No more possible moves.");
+            }
             DrawNextCard();
         }
 

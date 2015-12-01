@@ -123,6 +123,70 @@ namespace SquareRoyal
             return true;
         }
 
+        public bool HasPair(int x, int y)
+        {
+            if (IsEmptyCell(x, y) || Field[x, y].Number > 9)
+            {
+                return false; // no point
+            }
+            for (int ix = 0; ix < 4; ix++)
+            {
+                for (int iy = 0; iy < 4; iy++)
+                {
+                    if (ix == x & iy == y)
+                    {
+                        continue;
+                    }
+                    if (!IsEmptyCell(ix, iy))
+                    {
+                        if (Field[ix, iy].Number + Field[x, y].Number == 10)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool CheckIfStuck()
+        {
+            if (Cleaning)
+            {
+                for (int x = 0; x < 3; x++)
+                {
+                    for (int y = 0; y < 3; y++)
+                    {
+                        if (IsEmptyCell(x, y))
+                        {
+                            return false;
+                        }
+                        if (DiscardNeedsPair(x,y) & HasPair(x, y))
+                        {
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
+            else
+            {
+                switch (Deck.Last().Number)
+                {
+                    case 13:
+                        // (Field[0, 0].Number == 13) & (Field[0, 3].Number == 13) & (Field[3, 0].Number == 13) & (Field[3, 3].Number == 13)
+                        return !(IsEmptyCell(0, 0) || IsEmptyCell(0, 3) || IsEmptyCell(3, 0) || IsEmptyCell(3, 3));
+                    case 12:
+                        // (Field[0, 1].Number == 12) & (Field[0, 2].Number == 12) & (Field[3, 1].Number == 12) & (Field[3, 2].Number == 12)
+                        return !(IsEmptyCell(0, 1) || IsEmptyCell(0, 2) || IsEmptyCell(3, 1) || IsEmptyCell(3, 2));
+                    case 11:
+                        return !(IsEmptyCell(1, 0) || IsEmptyCell(1, 3) || IsEmptyCell(2, 0) || IsEmptyCell(2, 3));
+                    default:
+                        return false;
+                }
+            }
+        }
+
         public bool ShouldClean()
         {
             foreach (Card c in Field)
@@ -212,7 +276,7 @@ namespace SquareRoyal
         public bool AttemptDiscardPair(int x1, int y1, int x2, int y2)
         {
             if (CheatCanAlwaysDiscardCard || (Cleaning & !IsEmptyCell(x1, y1) & !IsEmptyCell(x2, y2)
-                & Field[x1, y1].Number + Field[x2, y2].Number == 10))
+                & Field[x1, y1] != Field[x2, y2] & Field[x1, y1].Number + Field[x2, y2].Number == 10))
             {
                 RemoveCard(x1, y1);
                 RemoveCard(x2, y2);
