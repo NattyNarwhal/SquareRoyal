@@ -228,7 +228,7 @@ namespace SquareRoyal
 
         private void cheat_showDeck_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(this, String.Join(Environment.NewLine, game.Deck), "Deck (bottom to top)");
+            MessageBox.Show(this, String.Join(Environment.NewLine, game.Deck.Reverse<Card>()), "Deck");
         }
     }
 }
