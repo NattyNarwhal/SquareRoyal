@@ -52,6 +52,11 @@ namespace SquareRoyal
                 .GetObject(String.Format("{0}_{1}", card.Suit, card.Number));
         }
 
+        public void Message(string msg)
+        {
+            statusBar1.Text = msg;
+        }
+
         public void VisuallyDeselectAll()
         {
             foreach (PictureBox p in tableLayoutPanel1.Controls)
@@ -91,30 +96,26 @@ namespace SquareRoyal
             ((PictureBox)tableLayoutPanel1.GetControlFromPosition(y, x)).Image = null;
         }
 
-        public void AttemptPlaceCard(int x, int y, Card c)
+        public void VisuallyPlaceCard(int x, int y, Card c)
         {
-            if (game.AttemptPlaceCard(x, y, c))
+            ((PictureBox)tableLayoutPanel1.GetControlFromPosition(y, x)).Image = GetFace(c);
+        }
+
+        public void CheckGameState()
+        {
+            if (game.Won)
             {
-                ((PictureBox)tableLayoutPanel1.GetControlFromPosition(y, x)).Image = GetFace(c); // picture
-                // empty the status bar messages
-                statusBar1.Text = String.Empty;
-                if (game.Won)
+                if (MessageBox.Show(this, "You've won! Want to play again?", "Square Royal", MessageBoxButtons.RetryCancel, MessageBoxIcon.Information) == DialogResult.Retry)
                 {
-                    if (MessageBox.Show(this, "You've won! Want to play again?", "Square Royal", MessageBoxButtons.RetryCancel, MessageBoxIcon.Information) == DialogResult.Retry)
-                    {
-                        NewGame();
-                    }
+                    NewGame();
                 }
-                if (game.Cleaning)
-                {
-                    statusBar1.Text = "The board is filled - start discarding pairs that add up to 10 or cards of 10.";
-                }
-                DrawNextCard();
+                return;
             }
-            else
+            if (game.Cleaning)
             {
-                statusBar1.Text = "You can't place that card there.";
+                Message("The board is filled - start discarding pairs that add up to 10 or cards of 10.");
             }
+            DrawNextCard();
         }
 
         private void card_click(object sender, EventArgs e)
@@ -178,9 +179,18 @@ namespace SquareRoyal
             // if not cleaning, we're placing
             else
             {
-                // statusBar1.Text = tableLayoutPanel1.GetPositionFromControl((Control)sender).ToString();
-                AttemptPlaceCard(x, y, game.Deck.Last());
+                Card c = game.Deck.Last(); // for VisuallyPlaceCard
+                if (game.AttemptPlaceCard(x, y))
+                {
+                    VisuallyPlaceCard(x, y, c);
+                    Message(String.Empty);
+                }
+                else
+                {
+                    Message("You can't place that card there.");
+                }
             }
+            CheckGameState();
         }
 
         private void nextCard_Click(object sender, EventArgs e)
