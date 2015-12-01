@@ -41,7 +41,7 @@ namespace SquareRoyal
             DeselectAll();
             foreach (PictureBox p in tableLayoutPanel1.Controls)
             {
-                p.Image = null;
+                p.Image = (Image)Properties.Resources.ResourceManager.GetObject("Blank");
             }
             DrawNextCard();
         }
@@ -93,7 +93,8 @@ namespace SquareRoyal
 
         public void VisuallyRemoveCard(int x, int y)
         {
-            ((PictureBox)tableLayoutPanel1.GetControlFromPosition(y, x)).Image = null;
+            ((PictureBox)tableLayoutPanel1.GetControlFromPosition(y, x)).Image =
+                (Image)Properties.Resources.ResourceManager.GetObject("Blank");
         }
 
         public void VisuallyPlaceCard(int x, int y, Card c)

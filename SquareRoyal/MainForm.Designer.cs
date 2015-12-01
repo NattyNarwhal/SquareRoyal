@@ -39,6 +39,7 @@
             this.cheatMenu = new System.Windows.Forms.MenuItem();
             this.cheat_canAlwaysPlaceCard = new System.Windows.Forms.MenuItem();
             this.cheat_alwaysDiscardCard = new System.Windows.Forms.MenuItem();
+            this.cheat_showDeck = new System.Windows.Forms.MenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox16 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -59,7 +60,6 @@
             this.cardsLeft = new System.Windows.Forms.Label();
             this.statusBar1 = new System.Windows.Forms.StatusBar();
             this.nextCard = new System.Windows.Forms.PictureBox();
-            this.cheat_showDeck = new System.Windows.Forms.MenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -146,6 +146,13 @@
             this.cheat_alwaysDiscardCard.Index = 1;
             this.cheat_alwaysDiscardCard.Text = "Always &Discard Card";
             this.cheat_alwaysDiscardCard.Click += new System.EventHandler(this.cheat_alwaysDiscardCard_Click);
+            // 
+            // cheat_showDeck
+            // 
+            this.cheat_showDeck.Enabled = false;
+            this.cheat_showDeck.Index = 2;
+            this.cheat_showDeck.Text = "&Show Deck";
+            this.cheat_showDeck.Click += new System.EventHandler(this.cheat_showDeck_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -420,13 +427,6 @@
             this.nextCard.TabIndex = 2;
             this.nextCard.TabStop = false;
             this.nextCard.Click += new System.EventHandler(this.nextCard_Click);
-            // 
-            // cheat_showDeck
-            // 
-            this.cheat_showDeck.Enabled = false;
-            this.cheat_showDeck.Index = 2;
-            this.cheat_showDeck.Text = "&Show Deck";
-            this.cheat_showDeck.Click += new System.EventHandler(this.cheat_showDeck_Click);
             // 
             // MainForm
             // 
