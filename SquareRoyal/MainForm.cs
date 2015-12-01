@@ -36,7 +36,7 @@ namespace SquareRoyal
 
         public void NewGame()
         {
-            statusBar1.Text = String.Empty;
+            Message(String.Empty);
             game = new SquareRoyal();
             DeselectAll();
             foreach (PictureBox p in tableLayoutPanel1.Controls)
@@ -55,6 +55,15 @@ namespace SquareRoyal
         public void Message(string msg)
         {
             statusBar1.Text = msg;
+        }
+
+        public void NewGameMessage(string msg)
+        {
+            if (MessageBox.Show(this, msg, this.Text, MessageBoxButtons.YesNo,
+                MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                NewGame();
+            }
         }
 
         public void VisuallyDeselectAll()
@@ -106,10 +115,8 @@ namespace SquareRoyal
         {
             if (game.Won)
             {
-                if (MessageBox.Show(this, "You've won! Want to play again?", "Square Royal", MessageBoxButtons.RetryCancel, MessageBoxIcon.Information) == DialogResult.Retry)
-                {
-                    NewGame();
-                }
+                Message("You've won!");
+                NewGameMessage("You've won! Want to play again?");
                 return;
             }
             if (game.Cleaning)
@@ -119,16 +126,16 @@ namespace SquareRoyal
             if (game.CheckIfStuck())
             {
                 Message("No more possible moves.");
+                NewGameMessage("There are no more possible moves. Do you want to start a new game?");
             }
             DrawNextCard();
         }
 
         private void card_click(object sender, EventArgs e)
         {
-            // don't do anything if we've won
-            if (game.Won)
+            // don't do anything if we've won or lost
+            if (game.Won || game.CheckIfStuck())
             {
-                Message("You've won!");
                 return;
             }
             // is the deck empty? if so, we can't place
