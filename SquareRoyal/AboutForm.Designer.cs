@@ -48,9 +48,10 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.button1.Location = new System.Drawing.Point(266, 167);
+            this.button1.Location = new System.Drawing.Point(355, 206);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(100, 28);
             this.button1.TabIndex = 0;
             this.button1.Text = "&Close";
             this.button1.UseVisualStyleBackColor = true;
@@ -63,10 +64,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
+            this.tabControl1.Location = new System.Drawing.Point(16, 15);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(329, 149);
+            this.tabControl1.Size = new System.Drawing.Size(439, 183);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPage1
@@ -75,10 +77,11 @@
             this.tabPage1.Controls.Add(this.versionLabel);
             this.tabPage1.Controls.Add(this.pictureBox1);
             this.tabPage1.Controls.Add(this.titleLabel);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(321, 123);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Size = new System.Drawing.Size(431, 154);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Information";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -88,9 +91,10 @@
             this.abstractLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.abstractLabel.Location = new System.Drawing.Point(7, 45);
+            this.abstractLabel.Location = new System.Drawing.Point(9, 55);
+            this.abstractLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.abstractLabel.Name = "abstractLabel";
-            this.abstractLabel.Size = new System.Drawing.Size(233, 75);
+            this.abstractLabel.Size = new System.Drawing.Size(311, 92);
             this.abstractLabel.TabIndex = 3;
             this.abstractLabel.Text = "Based on Jorundur Sveinn Matthiasson\'s impementation of King\'s Corners (also know" +
     "n as Damnit!) solitaire. Written in C#.\r\n\r\nThis game is under a 3-clause BSD lic" +
@@ -99,9 +103,10 @@
             // versionLabel
             // 
             this.versionLabel.AutoSize = true;
-            this.versionLabel.Location = new System.Drawing.Point(7, 23);
+            this.versionLabel.Location = new System.Drawing.Point(9, 28);
+            this.versionLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.versionLabel.Name = "versionLabel";
-            this.versionLabel.Size = new System.Drawing.Size(150, 13);
+            this.versionLabel.Size = new System.Drawing.Size(198, 17);
             this.versionLabel.TabIndex = 2;
             this.versionLabel.Text = "Version 1.0, by Calvin Buckley";
             // 
@@ -110,9 +115,10 @@
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Image = global::SquareRoyal.Properties.Resources.Spades_1;
-            this.pictureBox1.Location = new System.Drawing.Point(246, 3);
+            this.pictureBox1.Location = new System.Drawing.Point(328, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(72, 117);
+            this.pictureBox1.Size = new System.Drawing.Size(96, 144);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -122,19 +128,21 @@
             // 
             this.titleLabel.AutoSize = true;
             this.titleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLabel.Location = new System.Drawing.Point(6, 3);
+            this.titleLabel.Location = new System.Drawing.Point(8, 4);
+            this.titleLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(117, 20);
+            this.titleLabel.Size = new System.Drawing.Size(142, 25);
             this.titleLabel.TabIndex = 0;
             this.titleLabel.Text = "Square Royal";
             // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.richTextBox1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(321, 123);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Size = new System.Drawing.Size(431, 154);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "How to play";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -143,24 +151,25 @@
             // 
             this.richTextBox1.BackColor = System.Drawing.SystemColors.Control;
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Location = new System.Drawing.Point(3, 3);
+            this.richTextBox1.Location = new System.Drawing.Point(4, 4);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
             this.richTextBox1.ShortcutsEnabled = false;
-            this.richTextBox1.Size = new System.Drawing.Size(315, 117);
+            this.richTextBox1.Size = new System.Drawing.Size(423, 146);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             // 
             // AboutForm
             // 
             this.AcceptButton = this.button1;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(353, 202);
-            this.ControlBox = false;
+            this.ClientSize = new System.Drawing.Size(471, 249);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AboutForm";
