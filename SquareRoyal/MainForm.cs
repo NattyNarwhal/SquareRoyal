@@ -38,6 +38,8 @@ namespace SquareRoyal
         {
             Message(String.Empty);
             game = new SquareRoyal();
+            game.CheatCanAlwaysDiscardCard = cheat_alwaysDiscardCard.Checked;
+            game.CheatCanAlwaysPlaceCard = cheat_canAlwaysPlaceCard.Checked;
             DeselectAll();
             foreach (PictureBox p in tableLayoutPanel1.Controls)
             {
