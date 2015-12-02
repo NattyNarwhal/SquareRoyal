@@ -165,7 +165,7 @@ namespace SquareRoyal
                         {
                             return false;
                         }
-                        if (DiscardNeedsPair(x,y) & HasPair(x, y))
+                        if (Field[x,y].Number == 10 || (DiscardNeedsPair(x,y) & HasPair(x, y)))
                         {
                             return false;
                         }
