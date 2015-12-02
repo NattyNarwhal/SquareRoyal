@@ -160,7 +160,8 @@ namespace SquareRoyal
                 {
                     // royals and a 10 we don't check for because you can't meet c1 + c2 = 10 that way
                     // but first, check if it's the same bloody card! if so, deselect and exit
-                    if (game.AttemptDiscardPair(x, y, selectedCard.Item1, selectedCard.Item2))
+                    if (game.Field[x,y] != game.Field[selectedCard.Item1, selectedCard.Item2]
+                        & game.AttemptDiscardPair(x, y, selectedCard.Item1, selectedCard.Item2))
                     {
                         VisuallyRemoveCard(x, y);
                         VisuallyRemoveCard(selectedCard.Item1, selectedCard.Item2);
