@@ -102,15 +102,19 @@ namespace SquareRoyal
             }
         }
 
+        public void SetImage(int x, int y, Image i)
+        {
+            ((PictureBox)tableLayoutPanel1.GetControlFromPosition(y, x)).Image = i;
+        }
+
         public void VisuallyRemoveCard(int x, int y)
         {
-            ((PictureBox)tableLayoutPanel1.GetControlFromPosition(y, x)).Image =
-                Properties.Resources.Blank;
+            SetImage(x, y, Properties.Resources.Blank);
         }
 
         public void VisuallyPlaceCard(int x, int y, Card c)
         {
-            ((PictureBox)tableLayoutPanel1.GetControlFromPosition(y, x)).Image = GetFace(c);
+            SetImage(x, y, GetFace(c));
         }
 
         public void CheckGameState()
