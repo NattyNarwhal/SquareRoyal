@@ -122,7 +122,7 @@ namespace SquareRoyal
             if (game.Won)
             {
                 Message("You've won!");
-                NewGameMessage("You've won! Want to play again?");
+                NewGameMessage("You've won! Do you want to start a new game?");
                 return;
             }
             if (game.Cleaning)
@@ -140,8 +140,14 @@ namespace SquareRoyal
         private void card_click(object sender, EventArgs e)
         {
             // don't do anything if we've won or lost
-            if (game.Won || game.CheckIfStuck())
+            if (game.Won)
             {
+                Message("The game has been won.");
+                return;
+            }
+            if (game.CheckIfStuck())
+            {
+                Message("There are no more possible moves.");
                 return;
             }
             // is the deck empty? if so, we can't place
