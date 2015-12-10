@@ -131,7 +131,7 @@ namespace SquareRoyal
             }
             if (game.CheckIfStuck())
             {
-                Message("No more possible moves.");
+                Message("There are no more possible moves.");
                 NewGameMessage("There are no more possible moves. Do you want to start a new game?");
             }
             DrawNextCard();
