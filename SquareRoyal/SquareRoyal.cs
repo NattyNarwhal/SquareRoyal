@@ -157,9 +157,9 @@ namespace SquareRoyal
                 {
                     return true;
                 }
-                for (int x = 0; x < 3; x++)
+                for (int x = 0; x < 4; x++)
                 {
-                    for (int y = 0; y < 3; y++)
+                    for (int y = 0; y < 4; y++)
                     {
                         if (IsEmptyCell(x, y))
                         {
