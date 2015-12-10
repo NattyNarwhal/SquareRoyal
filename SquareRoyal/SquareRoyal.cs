@@ -175,7 +175,7 @@ namespace SquareRoyal
             }
             else
             {
-                if (CheatCanAlwaysDiscardCard)
+                if (CheatCanAlwaysPlaceCard)
                 {
                     return false;
                 }
