@@ -228,7 +228,7 @@ namespace SquareRoyal
                 if (game.StopCleaning())
                 {
                     DeselectAll();
-                    DrawNextCard();
+                    CheckGameState();
                 }
                 // if not, we return
             }
