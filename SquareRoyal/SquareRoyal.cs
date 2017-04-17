@@ -27,17 +27,33 @@ namespace SquareRoyal
         public bool Won { get; private set; }
 
         // cheats
-        public bool CheatCanAlwaysPlaceCard = false;
-        public bool CheatCanAlwaysDiscardCard = false;
+        /// <summary>
+        /// If the user can always place a card, even in invalid positions.
+        /// </summary>
+        public bool CheatCanAlwaysPlaceCard { get; set; }
+        /// <summary>
+        /// If the user can always discord a card, even without a valid pair.
+        /// </summary>
+        public bool CheatCanAlwaysDiscardCard { get; set; }
 
+        /// <summary>
+        /// Starts a new game.
+        /// </summary>
         public SquareRoyal()
         {
+            // these get 
+            CheatCanAlwaysDiscardCard = false;
+            CheatCanAlwaysPlaceCard = false;
             Deck = CardFunctions.GetOrderedDeck();
             Deck.Shuffle();
             Field = new Card[4, 4];
             Cleaning = false;
         }
 
+        /// <summary>
+        /// Checks if the game is in a win state.
+        /// </summary>
+        /// <returns>If the game has been won.</returns>
         public bool HasWon()
         {
             // TODO: refractor as with royal placement
@@ -65,11 +81,24 @@ namespace SquareRoyal
             return false;
         }
 
+        /// <summary>
+        /// Checks if a slot is empty.
+        /// </summary>
+        /// <param name="x">The x position of the slot.</param>
+        /// <param name="y">The y position of the slot.</param>
+        /// <returns>If the slot is empty.</returns>
         public bool IsEmptyCell(int x, int y)
         {
             return (Field[x, y] == null);
         }
 
+        /// <summary>
+        /// Checks if a card can be placed into a slot.
+        /// </summary>
+        /// <param name="x">The x position of the slot.</param>
+        /// <param name="y">The y position of the slot.</param>
+        /// <param name="c">The card to try to place.</param>
+        /// <returns>If the card can be placed or not.</returns>
         public bool CanPlace(int x, int y, Card c)
         {
             if (Cleaning)
@@ -123,6 +152,12 @@ namespace SquareRoyal
             return true;
         }
 
+        /// <summary>
+        /// Checks if a card has another card to pair with, to add to ten.
+        /// </summary>
+        /// <param name="x">The x position of the card.</param>
+        /// <param name="y">The y position of the card.</param>
+        /// <returns>If the card has a pair or not.</returns>
         public bool HasPair(int x, int y)
         {
             if (IsEmptyCell(x, y) || Field[x, y].Number > 9)
@@ -149,13 +184,18 @@ namespace SquareRoyal
             return false;
         }
 
+        /// <summary>
+        /// Checks to see if the game in stuck, either by a lack of cards pairs
+        /// to clean, or a lack of available slots to place cards into.
+        /// </summary>
+        /// <returns>If the game is stuck or not.</returns>
         public bool CheckIfStuck()
         {
             if (Cleaning)
             {
                 if (CheatCanAlwaysDiscardCard)
                 {
-                    return true;
+                    return false;
                 }
                 for (int x = 0; x < 4; x++)
                 {
@@ -195,6 +235,11 @@ namespace SquareRoyal
             }
         }
 
+        /// <summary>
+        /// Checks to see if the game should enter the cleaning phase, due to a
+        /// lack of space on the board.
+        /// </summary>
+        /// <returns>If the cleaning phase should be entered.</returns>
         public bool ShouldClean()
         {
             foreach (Card c in Field)
@@ -208,6 +253,14 @@ namespace SquareRoyal
             return true;
         }
 
+        /// <summary>
+        /// Attempts to exit the cleaning phase.
+        /// </summary>
+        /// <remarks>
+        /// If the game isn't in the cleaning phase, or there's still a lack of
+        /// empty space, then this will return false.
+        /// </remarks>
+        /// <returns>If the cleaning phase was exited.</returns>
         public bool StopCleaning()
         {
             if (Cleaning & !ShouldClean())
@@ -221,11 +274,23 @@ namespace SquareRoyal
             }
         }
 
+        /// <summary>
+        /// Removes a card from the board.
+        /// </summary>
+        /// <param name="x">The x position of the card to remove.</param>
+        /// <param name="y">The y position of the card to remove.</param>
         public void RemoveCard(int x, int y)
         {
             Field[x, y] = null;
         }
 
+        /// <summary>
+        /// Attempts to place a card on to the board.
+        /// </summary>
+        /// <param name="x">The x position to place the card in.</param>
+        /// <param name="y">The y position to place the card in.</param>
+        /// <param name="c">The card to place.</param>
+        /// <returns>If the card was placed or not.</returns>
         public bool AttemptPlaceCard(int x, int y, Card c)
         {
             if (CheatCanAlwaysPlaceCard || CanPlace(x, y, c))
@@ -244,6 +309,12 @@ namespace SquareRoyal
             }
         }
 
+        /// <summary>
+        /// Attempts to place the current card in the deck on to the board.
+        /// </summary>
+        /// <param name="x">The x position to place the card in.</param>
+        /// <param name="y">The y position to place the card in.</param>
+        /// <returns>If the card was placed or not.</returns>
         public bool AttemptPlaceCard(int x, int y)
         {
             return AttemptPlaceCard(x, y, Deck.Last());
@@ -255,6 +326,14 @@ namespace SquareRoyal
                 (!IsEmptyCell(x, y) & Field[x, y].Number < 11);
         }
 
+        /// <summary>
+        /// Sees if a card needs to be matched in a pair.
+        /// </summary>
+        /// <param name="x">The x position of the card to check.</param>
+        /// <param name="y">The y position of the card to check.</param>
+        /// <returns>
+        /// If the card needs another card to be paired with.
+        /// </returns>
         public bool DiscardNeedsPair(int x, int y)
         {
             if (CheatCanAlwaysDiscardCard)
@@ -267,6 +346,13 @@ namespace SquareRoyal
             }
         }
 
+        /// <summary>
+        /// Tries to see if a card is valued at 10 to be discarded, and does so
+        /// if possible.
+        /// </summary>
+        /// <param name="x">The x position of the card to remove.</param>
+        /// <param name="y">The y position of the card to remove.</param>
+        /// <returns>If the card was removed.</returns>
         public bool AttemptDiscardSingleCard(int x, int y)
         {
             if (CheatCanAlwaysDiscardCard ||
@@ -281,6 +367,23 @@ namespace SquareRoyal
             }
         }
 
+        /// <summary>
+        /// Try to see if two card pairs add up to ten, so they can be
+        /// discarded, and does so if possible.
+        /// </summary>
+        /// <param name="x1">
+        /// The x position of the first card to remove.
+        /// </param>
+        /// <param name="y1">
+        /// The y position of the first card to remove.
+        /// </param>
+        /// <param name="x2">
+        /// The x position of the second card to remove.
+        /// </param>
+        /// <param name="y2">
+        /// The y position of the second card to remove.
+        /// </param>
+        /// <returns>If the pair was removed.</returns>
         public bool AttemptDiscardPair(int x1, int y1, int x2, int y2)
         {
             if (CheatCanAlwaysDiscardCard || (Cleaning & !IsEmptyCell(x1, y1) & !IsEmptyCell(x2, y2)
