@@ -119,6 +119,7 @@ namespace SquareRoyal
 
         public void CheckGameState()
         {
+            DrawNextCard();
             if (game.Won)
             {
                 Message("You've won!");
@@ -134,7 +135,6 @@ namespace SquareRoyal
                 Message("There are no more possible moves.");
                 NewGameMessage("There are no more possible moves. Do you want to start a new game?");
             }
-            DrawNextCard();
         }
 
         private void card_click(object sender, EventArgs e)
