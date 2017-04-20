@@ -407,13 +407,14 @@
             this.cardsLeft.Name = "cardsLeft";
             this.cardsLeft.Size = new System.Drawing.Size(72, 32);
             this.cardsLeft.TabIndex = 6;
+            this.cardsLeft.Text = "52";
             this.cardsLeft.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // statusBar1
             // 
-            this.statusBar1.Location = new System.Drawing.Point(0, 444);
+            this.statusBar1.Location = new System.Drawing.Point(0, 448);
             this.statusBar1.Name = "statusBar1";
-            this.statusBar1.Size = new System.Drawing.Size(428, 22);
+            this.statusBar1.Size = new System.Drawing.Size(435, 22);
             this.statusBar1.SizingGrip = false;
             this.statusBar1.TabIndex = 7;
             // 
@@ -434,7 +435,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.Green;
-            this.ClientSize = new System.Drawing.Size(428, 466);
+            this.ClientSize = new System.Drawing.Size(435, 470);
             this.Controls.Add(this.statusBar1);
             this.Controls.Add(this.cardsLeft);
             this.Controls.Add(this.tableLayoutPanel1);
